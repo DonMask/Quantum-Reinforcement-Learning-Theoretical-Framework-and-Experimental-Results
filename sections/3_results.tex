@@ -1,1 +1,22 @@
+We evaluated our approach on three environments:
 
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lccc}
+        \toprule
+        Environment & Classical & Quantum & Improvement \\
+        \midrule
+        CartPole & 195 & 278 & 42\% \\
+        Quantum Control & 0.72 & 0.89 & 23\% \\
+        \bottomrule
+    \end{tabular}
+    \caption{Performance comparison (average reward)}
+    \label{tab:results}
+\end{table}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/learning_curves}
+    \caption{Training progress comparison}
+    \label{fig:learning}
+\end{figure}
