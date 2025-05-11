@@ -12,10 +12,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
-      - name: Set up TeXLive
+      - name: Install missing dependencies
         run: |
-          apt-get update
-          apt-get install -y texlive-full
+          apk update
+          apk add --no-cache bash coreutils
           
       - name: Compile LaTeX
         run: |
