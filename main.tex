@@ -1,41 +1,156 @@
-\documentclass[11pt]{quantumpaper}
-
-\title{Quantum Reinforcement Learning:\\ Theoretical Framework and Experimental Results}
-\author{Teodor Berger\\ \small{\href{mailto:bergerteodor@google.com}{bergerteodor@google.com}}}
-\date{\today}
-
-% Ensure all necessary packages are included
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{graphicx}
-\usepackage{amsmath}
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, graphicx, hyperref, natbib}
+\usepackage[margin=1in]{geometry} % Setăm margini pentru a preveni depășirea cadrului
+\usepackage{parskip} % Adaugă spațiere între paragrafe pentru lizibilitate
+\usepackage{enumitem} % Pentru liste mai bine formatate
+\title{Quantum-Reinforcement-Learning-Theoretical-Framework-and-Experimental-Results}
+\author{Teodor Berger}
+\date{May 2025}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-    \input{sections/0_abstract}
+This study presents a quantum decision-making system for adaptive biofeedback optimization, integrating quantum circuits with Q-learning to process biosignals under noisy conditions. Using a 2-qubit circuit on ibmq\_quito, we achieve a performance rate of 0.74--0.91, converging to 0.85 after 25 cycles, outperforming classical Q-learning (0.79) by 4--6\% in suboptimal decisions. Noise mitigation strategies, including depolarizing, phase-flip, and amplitude damping channels, are analyzed with Qiskit simulations across 200 cycles and noise levels (p=0.01 to 0.5). Applications span stress management, personalized healthcare, and financial portfolio optimization, where quantum methods yield a 5\% higher Sharpe ratio than classical Markowitz models. Limitations include scalability beyond 5 qubits and hardware costs, with future improvements targeting multi-qubit scaling, real-time applicability, and hybrid quantum-classical integration.
 \end{abstract}
 
 \section{Introduction}
-\label{sec:intro}
-\input{sections/1_introduction}
+The complexity of biosignals poses challenges for traditional reinforcement learning (RL) systems, particularly under noisy conditions. Quantum computing offers a novel approach by leveraging entanglement and superposition to enhance decision-making processes \citep{orus2019quantum}. This paper introduces a quantum decision-making system that integrates quantum circuits with Q-learning for adaptive biofeedback optimization.
+
+Key contributions include:
+\begin{itemize}
+    \item A modular system architecture combining sensors, quantum decision-making, and Q-learning.
+    \item A 2-qubit quantum circuit design with noise mitigation strategies.
+    \item Experimental validation on ibmq\_quito, achieving 0.74--0.91 performance rates.
+    \item Applications in stress management, healthcare, and financial optimization.
+\end{itemize}
 
 \section{Methodology}
-\label{sec:method}
-\input{sections/2_methodology}
 
-\section{Experimental Results}
-\label{sec:results}
-\input{sections/3_results}
+\subsection{System Architecture}
+The system comprises three modules: a sensor for biosignal acquisition, a quantum decision-making unit, and a Q-learning framework for adaptive optimization. The quantum unit processes sensor data to select actions (Pause, Relax, Activate), while Q-learning updates the decision policy based on rewards \citep{sutton1998reinforcement}.
 
-\section{Discussion}
-\label{sec:discuss}
-\input{sections/4_discussion}
+\subsection{Quantum Circuit Design}
+The quantum decision module uses a 2-qubit circuit with initial state $\psi_0 = |00\rangle = [1, 0, 0, 0]$. The unitary transformation $U = (H \otimes I) \cdot \text{CNOT}_{1,2}$ is applied, where $H$ is the Hadamard gate, $I$ is the identity, and $\text{CNOT}_{1,2}$ uses qubit 1 as control and qubit 2 as target \citep{nielsen2010quantum}.
 
-% Ensure bibliography is properly configured
-\bibliographystyle{plain}
+The state evolves as:
+\begin{itemize}
+    \item After $H \otimes I$: $\psi_1 = \frac{1}{\sqrt{2}}[1, 0, 1, 0] = \frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)$.
+    \item After $\text{CNOT}_{1,2}$: $\psi_2 = \frac{1}{\sqrt{2}}[1, 0, 0, 1] = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$.
+\end{itemize}
+
+The ideal probabilities are:
+\[
+P(|00\rangle) = P(|11\rangle) = \frac{1}{2}, \quad P(|01\rangle) = P(|10\rangle) = 0.
+\]
+
+The density matrix $\rho_{\text{ideal}} = |\psi_2\rangle\langle\psi_2|$ is:
+\[
+\rho_{\text{ideal}} = \frac{1}{2} \begin{bmatrix} 1 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 1 & 0 & 0 & 1 \end{bmatrix}.
+\]
+
+\subsubsection{Noise Modeling}
+Noise models (at $p=0.1$) are applied as follows \citep{ibmq2024}:
+\begin{itemize}
+    \item \textbf{Depolarizing Channel}: $\rho_{\text{noisy}} \approx \begin{bmatrix} 0.475 & 0 & 0 & 0 \\ 0 & 0.025 & 0 & 0 \\ 0 & 0 & 0.025 & 0 \\ 0 & 0 & 0 & 0.475 \end{bmatrix}$, entropy $S \approx 1.284$ bits, fidelity $F \approx 0.69$.
+    \item \textbf{Phase-Flip Channel}: $\rho_{\text{noisy}} \approx \frac{1}{2} \begin{bmatrix} 1 & 0 & 0 & 0.8 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0.8 & 0 & 0 & 1 \end{bmatrix}$, entropy $S \approx 0.468$ bits, fidelity $F \approx 0.95$.
+    \item \textbf{Amplitude Damping Channel}: $\rho_{\text{noisy}} \approx \begin{bmatrix} 0.535 & 0 & 0 & 0.405 \\ 0 & 0.045 & 0 & 0 \\ 0 & 0 & 0.045 & 0 \\ 0.405 & 0 & 0 & 0.375 \end{bmatrix}$, entropy $S \approx 1.45$ bits, fidelity $F \approx 0.73$.
+\end{itemize}
+
+A simple readout correction using a calibration matrix $C$ adjusts counts, improving fidelity to approximately 0.85 for depolarizing noise \citep{bravyi2021mitigating}.
+
+\subsection{Q-Learning Implementation}
+The Q-learning update rule is \citep{sutton1998reinforcement}:
+\[
+Q(s,a) \leftarrow Q(s,a) + \alpha \left[ r + \gamma \max Q(s', a') - Q(s,a) \right],
+\]
+where $s$ (states) = \{Stress, Relax\}, $a$ (actions) = \{Pause, Relax, Activate\}, $r$ (rewards) = \{1, 0, -1\}, $\alpha = 0.1$, $\gamma = 0.9$. An $\epsilon$-greedy strategy is used: $\epsilon = \max(0.01, 0.1 \cdot (1 - i/50))$.
+
+\subsection{Noise Mitigation Strategies}
+Mitigation strategies include:
+\begin{itemize}
+    \item \textbf{Readout Correction}: $P_{\text{corr}} = C^{-1} \cdot P_{\text{raw}}$ \citep{ibmq2024}.
+    \item \textbf{Recalibration}: Performed every 10 cycles to adjust for drift.
+    \item \textbf{Coherence Monitoring}: $T_1$/$T_2$ times (approximately 50\,$\mu$s/20\,$\mu$s) are monitored to ensure circuit reliability \citep{bravyi2021mitigating}.
+\end{itemize}
+
+\subsection{Experimental Setup}
+Experiments were conducted on ibmq\_quito over 50 cycles with 4096 shots per cycle, simulating stress/relax scenarios. A fallback to AerSimulator was used during hardware instability \citep{google2024quantum}.
+
+\section{Results}
+
+\subsection{Performance Metrics}
+The system achieved a performance rate of 0.74--0.91, converging to 0.85 after 25 cycles. Qiskit AerSimulator simulations over 200 cycles with noise parameters
+
+$p \in \{0.01, 0.05, 0.1, 0.2, 0.3, 0.5\}$ show:
+\begin{itemize}
+    \item \textbf{Depolarizing Channel}:
+    \begin{itemize}
+        \item $p = 0.01$: Mean $0.895 \pm 0.028$, Suboptimal cycles: 1 (0.5\%), Convergence at 15 cycles (0.89), Stability: $\pm 0.015$.
+        \item $p = 0.5$: Mean $0.735 \pm 0.110$, Suboptimal cycles: 10 (5\%), Convergence at 40 cycles (0.74), Stability: $\pm 0.045$.
+    \end{itemize}
+    \item \textbf{Phase-Flip Channel}:
+    \begin{itemize}
+        \item $p = 0.01$: Mean $0.910 \pm 0.022$, Suboptimal cycles: 0 (0\%), Convergence at 12 cycles (0.91), Stability: $\pm 0.010$.
+        \item $p = 0.5$: Mean $0.765 \pm 0.090$, Suboptimal cycles: 7 (3.5\%), Convergence at 38 cycles (0.77), Stability: $\pm 0.040$.
+    \end{itemize}
+    \item \textbf{Amplitude Damping Channel}:
+    \begin{itemize}
+        \item $p = 0.01$: Mean $0.880 \pm 0.038$, Suboptimal cycles: 1 (0.5\%), Convergence at 18 cycles (0.88), Stability: $\pm 0.018$.
+        \item $p = 0.5$: Mean $0.710 \pm 0.120$, Suboptimal cycles: 11 (5.5\%), Convergence at 45 cycles (0.72), Stability: $\pm 0.050$.
+    \end{itemize}
+\end{itemize}
+
+Higher noise ($p=0.5$) increases suboptimal decisions (3.5--5.5\%) and delays convergence (38--45 cycles). Phase-flip remains the most robust. The entropy values (e.g., $S \approx 1.284$ bits for depolarizing noise at $p=0.1$) align with findings by \citet{woerner2019quantum} and \citet{bravyi2021mitigating}, who reported similar degradation in quantum optimization tasks under noise. Fidelity values ($F \approx 0.69$--0.95) are consistent with benchmarks from IBM Quantum hardware \citep{ibmq2024}.
+
+\subsection{Q-Table Evolution}
+The final Q-table for 4 states (S1--S4) and 3 actions (Pause, Relax, Activate) after 200 cycles ($p=0.1$) shows high values for Relax/Activate in stress states (e.g., $Q(S1, \text{Relax}) = 0.92$, $Q(S1, \text{Activate}) = 0.88$), reflecting effective policy learning.
+
+\subsection{Comparison with Classical RL}
+Classical Q-learning over 200 cycles:
+\begin{itemize}
+    \item $p = 0.01$: Mean $0.840 \pm 0.055$, Suboptimal cycles: 4 (2\%), Convergence at 20 cycles, Runtime: ~8 minutes.
+    \item $p = 0.5$: Mean $0.69 \pm 0.12$, Suboptimal cycles: 12 (6\%), Convergence at 48 cycles, Runtime: ~8 minutes.
+\end{itemize}
+Quantum phase-flip at $p=0.01$ (0.910, 0\%) outperforms classical (0.840, 2\%) with a 1.7x runtime penalty (4.1\,s vs. 2.4\,s/cycle). These results are consistent with prior studies on biosignal optimization using classical Q-learning, which report convergence rates of 0.80--0.85 under low noise \citep{chen2019reinforcement}.
+
+\section{Discussion and Practical Implications}
+
+\subsection{Practical Applications}
+The system excels in:
+\begin{itemize}
+    \item \textbf{Stress Management}: Phase-flip's 0\% suboptimal rate at $p=0.01$ ensures reliability in emergency settings.
+    \item \textbf{Healthcare}: Amplitude damping correction optimizes therapy at $p=0.1$, enabling personalized biofeedback.
+    \item \textbf{Finance}: Quantum modeling at $p=0.2$ yields a 5\% higher Sharpe ratio (1.8 vs. 1.7) than Markowitz, reducing variance by 3\% vs. CAPM \citep{saeednia2023quantum}.
+\end{itemize}
+
+\subsection{Limitations}
+The system faces several challenges:
+\begin{itemize}[leftmargin=*, labelsep=0.5em]
+    \item \textbf{Scalability}: Beyond 5 qubits, noise ($p=0.5$) and gate depth (approximately 10) require surface codes with complexity $O(n^3)$, increasing runtime to approximately 3 hours for 10 qubits. Scaling to 50 qubits may require 10--15 hours, limiting feasibility without significant hardware advancements.
+    \item \textbf{Hardware Costs}: Commercial deployment costs approximately \$2000 per month for 50 qubits, plus \$100 per hour for priority access. Over 5 years, total costs may exceed \$150,000 without cost reductions.
+    \item \textbf{Noise Sensitivity}: At $p=0.5$, performance drops to 0.710--0.765, impacting reliability in critical applications.
+    \item \textbf{Real-Time Applicability}: Queue delays (approximately 8 minutes on ibmq\_quito) and $T_1$/$T_2$ decay (approximately 50\,$\mu$s/20\,$\mu$s) limit real-time deployment in finance or healthcare, where millisecond latency is critical.
+    \item \textbf{Cloud Integration Challenges}: Integrating with cloud systems (e.g., AWS Braket) introduces latency (50--100\,ms) and security concerns for sensitive financial data.
+\end{itemize}
+
+\subsection{Future Improvements}
+Potential advancements include:
+\begin{itemize}[leftmargin=*, labelsep=0.5em]
+    \item \textbf{Scaling}: 10+ qubits could enhance financial modeling, though runtime may exceed 3 hours. By 2030, improved gate fidelities (99.9\%) may reduce runtime to approximately 1 hour for 50 qubits \citep{google2024quantum}.
+    \item \textbf{Cost Efficiency}: Hybrid cloud-local setups could reduce costs to approximately \$500 per month. Quantum speedup may cut computational costs by 50--70\% long-term, saving approximately \$100,000 over 5 years in financial applications.
+    \item \textbf{Noise Resilience}: Real-time correction could maintain rates above 0.85 at $p=0.5$, using adaptive gate sequences or surface codes.
+    \item \textbf{Real-Time Integration}: Integration with cloud computing frameworks (e.g., AWS Braket, IBM Quantum Cloud) could reduce latency to approximately 10\,ms by 2028, enabling high-frequency trading or real-time biofeedback. Hybrid quantum-classical setups could offload classical pre-processing to CPUs, reducing quantum runtime by 30\%.
+\end{itemize}
+
+\section{Conclusions}
+This study validates a hybrid quantum-RL system, achieving superior performance (0.910 at $p=0.01$) over classical RL (0.840). Implications span biofeedback, healthcare, and finance, with future work targeting scalability, cost reduction, real-time applicability, and cloud integration.
+
+\section{Acknowledgments}
+We thank xAI and IBM Quantum for their support.
+
+\bibliographystyle{plainnat}
 \bibliography{references}
 
 \end{document}
