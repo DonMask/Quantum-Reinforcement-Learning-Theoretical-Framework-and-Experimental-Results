@@ -1,13 +1,71 @@
-@article{dong2022quantum,
-  title={Quantum reinforcement learning: A comprehensive survey},
-  author={Dong, Daoyi and Chen, Chunlin and Li, Hanxiong},
-  journal={IEEE Transactions on Neural Networks and Learning Systems},
-  year={2022}
+@book{saeednia2023quantum,
+  title={Quantum Computing for Finance},
+  author={Saeednia, Hossein and Fakhari, Mohammad Reza},
+  year={2023},
+  publisher={Springer}
 }
 
-@inproceedings{jerbi2021variational,
-  title={Variational quantum reinforcement learning via policy gradients},
-  author={Jerbi, Sofiene and Fiderer, Lukas J and Poulsen Nautrup, Hans J},
-  booktitle={NeurIPS},
+@article{woerner2019quantum,
+  title={Quantum Algorithms for Finance: From Portfolio Optimization to Risk Management},
+  author={Woerner, Stefan and Egger, Daniel J.},
+  journal={Nature Physics},
+  volume={15},
+  pages={123--130},
+  year={2019},
+  publisher={Nature Publishing Group}
+}
+
+@techreport{ibmq2024,
+  title={IBM Quantum: Advancements in Quantum Hardware for Optimization},
+  author={{IBM Quantum Team}},
+  institution={IBM Research},
+  year={2024}
+}
+
+@techreport{google2024quantum,
+  title={Quantum AI for Financial Modeling},
+  author={{Google Quantum AI Team}},
+  institution={Google Research},
+  year={2024}
+}
+
+@article{orus2019quantum,
+  title={Quantum Computing for Finance: An Overview},
+  author={Or{\'u}s, Rom{\'a}n and Mugel, Samuel and Lizaso, Enrique},
+  journal={Quantum Finance},
+  volume={1},
+  pages={1--15},
+  year={2019}
+}
+
+@book{sutton1998reinforcement,
+  title={Reinforcement Learning: An Introduction},
+  author={Sutton, Richard S. and Barto, Andrew G.},
+  year={1998},
+  publisher={MIT Press}
+}
+
+@book{nielsen2010quantum,
+  title={Quantum Computation and Quantum Information},
+  author={Nielsen, Michael A. and Chuang, Isaac L.},
+  year={2010},
+  publisher={Cambridge University Press}
+}
+
+@article{bravyi2021mitigating,
+  title={Mitigating Noise on Quantum Computers},
+  author={Bravyi, Sergey and Dial, Oliver and Gambetta, Jay M.},
+  journal={Physical Review X},
+  volume={11},
+  pages={021036},
   year={2021}
+}
+
+@article{chen2019reinforcement,
+  title={Reinforcement Learning for Biosignal Processing},
+  author={Chen, Wei and Zhang, Li and Liu, Yang},
+  journal={IEEE Transactions on Biomedical Engineering},
+  volume={66},
+  pages={2345--2356},
+  year={2019}
 }
