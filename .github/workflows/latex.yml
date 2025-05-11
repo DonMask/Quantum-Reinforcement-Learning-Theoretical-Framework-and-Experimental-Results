@@ -1,46 +1,41 @@
-name: Build LaTeX Document
+\documentclass[11pt]{quantumpaper}
 
-on: [push, pull_request]
+\title{Quantum Reinforcement Learning:\\ Theoretical Framework and Experimental Results}
+\author{Teodor Berger\\ \small{\href{mailto:bergerteodor@google.com}{bergerteodor@google.com}}}
+\date{\today}
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    container: 
-      image: ghcr.io/xu-cheng/texlive-full:latest
-      
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        
-      - name: Install missing dependencies
-        run: |
-          apk update
-          apk add --no-cache bash coreutils findutils
-          
-      - name: Verify files exist
-        run: |
-          ls -la
-          ls -la sections/
-          ls -la figures/
-          
-      - name: Compile LaTeX (first pass)
-        run: |
-          pdflatex -interaction=nonstopmode -halt-on-error main.tex || (cat main.log && exit 1)
-          
-      - name: Compile BibTeX
-        run: |
-          bibtex main.aux || (cat main.blg && exit 1)
-          
-      - name: Compile LaTeX (second pass)
-        run: |
-          pdflatex -interaction=nonstopmode -halt-on-error main.tex || (cat main.log && exit 1)
-          
-      - name: Final LaTeX compilation
-        run: |
-          pdflatex -interaction=nonstopmode -halt-on-error main.tex || (cat main.log && exit 1)
-          
-      - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Quantum-RL-Paper.pdf
-          path: main.pdf
+% Ensure all necessary packages are included
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    \input{sections/0_abstract}
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+\input{sections/1_introduction}
+
+\section{Methodology}
+\label{sec:method}
+\input{sections/2_methodology}
+
+\section{Experimental Results}
+\label{sec:results}
+\input{sections/3_results}
+
+\section{Discussion}
+\label{sec:discuss}
+\input{sections/4_discussion}
+
+% Ensure bibliography is properly configured
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
