@@ -1,39 +1,29 @@
-# Quantum Reinforcement Learning Framework
+# Quantum Reinforcement Learning: Theoretical Framework and Experimental Results
 
-[![PDF Build](https://github.com/DonMask/Quantum-Reinforcement-Learning-Theoretical-Framework-and-Experimental-Results/actions/workflows/latex.yml/badge.svg)](https://github.com/DonMask/Quantum-Reinforcement-Learning-Theoretical-Framework-and-Experimental-Results/actions/workflows/latex.yml)
+**Author:** Teodor Berger  
+**GitHub:** [DonMask](https://github.com/DonMask)  
+**License:** [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 
-This repository contains the LaTeX source for the paper:
+## Overview
 
-**"Quantum Reinforcement Learning: Theoretical Framework and Experimental Results"**  
-by Teodor Berger (`bergerteodor@google.com`)
+This repository presents a complete theoretical and experimental study of quantum reinforcement learning (QRL). The project is developed entirely in LaTeX and structured for clarity, reproducibility, and scientific integrity.
 
 ## Project Structure
 
-- `main.tex` - Main document
-- `sections/` - Individual paper sections
-- `figures/` - All visual assets
-- `quantumpaper.cls` - Custom document class
-- `references.bib` - Bibliography database
+- `main.tex` – Master file for compilation  
+- `chapters/` – Theoretical framework, methods, and experimental results  
+- `figures/` – All visual material  
+- `references.bib` – Bibliographic sources in BibTeX format  
+- `LICENSE` – Licensing terms (Creative Commons BY-NC 4.0)
 
 ## Compilation
 
-1. Install full TeXLive distribution
-2. Run:
-```bash
-pdflatex main.tex
-bibtex main
-pdflatex main.tex
-pdflatex main.tex
-```
+Use Overleaf or any LaTeX editor to compile `main.tex`. No external scripts or terminal commands required.
 
 ## Citation
 
-```bibtex
-@article{berger2023quantum,
-  title={Quantum Reinforcement Learning: Theoretical Framework and Experimental Results},
-  author={Berger, Teodor},
-  year={2023},
-  publisher={GitHub},
-  howpublished={\url{https://github.com/DonMask/Quantum-Reinforcement-Learning-Theoretical-Framework-and-Experimental-Results}}
-}
-```
+If you find this work useful in your research, please cite it accordingly.
+
+---
+
+*This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.*
