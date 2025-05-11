@@ -34,8 +34,7 @@ This repository hosts the LaTeX source files and compiled PDF for the paper *"Qu
 
 ## DOI and Archival
 This work is archived on [Zenodo](https://zenodo.org) with a permanent DOI:  
-[**10.5281/zenodo.1234567**](https://doi.org/10.5281/zenodo.1234567)  
-(Replace with the actual DOI after publishing on Zenodo.)
+[**10.5281/zenodo.15382550**](https://doi.org/10.5281/zenodo.15382550)
 
 ---
 
@@ -60,6 +59,6 @@ Email: [bergerteodor@googlemail.com](mailto:bergerteodor@googlemail.com)
 ---
 
 ## Acknowledgments
-We express our gratitude to the xAI and IBM Quantum teams for their invaluable support.
+We express our gratitude to the IBM Quantum teams for their invaluable support.
 
 *Teodor Berger, May 2025*
