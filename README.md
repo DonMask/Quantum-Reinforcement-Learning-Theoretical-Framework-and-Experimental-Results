@@ -1,6 +1,6 @@
-# Quantum-Reinforcement-Learning-Theoretical-Framework-and-Experimental-Results v1.0
+# Quantum-Reinforcement-Learning-Theoretical-Framework-and-Experimental-Results v1.1
 
-Welcome to the repository for the **Quantum RL Framework v1.0**, a sophisticated quantum decision-making system that integrates quantum circuits with reinforcement learning (Q-learning) for adaptive biofeedback optimization. Released on May 11, 2025, this work demonstrates applications in stress management, personalized healthcare, and financial portfolio optimization, achieving a performance rate of 0.74–0.91 and outperforming classical methods by 4-6% in suboptimal decisions.
+Welcome to the repository for the **Quantum RL Framework v1.1**, a sophisticated quantum decision-making system that integrates quantum circuits with reinforcement learning (Q-learning) for adaptive biofeedback optimization. Released on May 11, 2025, this work demonstrates applications in stress management, personalized healthcare, and financial portfolio optimization, achieving a performance rate of 0.74–0.91 and outperforming classical methods by 4-6% in suboptimal decisions.
 
 This project leverages IBM Quantum hardware and Qiskit simulations, with a peak performance of 0.910 under low noise conditions (p=0.01).
 
@@ -18,7 +18,7 @@ This repository hosts the LaTeX source files and compiled PDF for the paper *"Qu
 ## Files
 - `main.tex`: LaTeX source code for the paper.
 - `references.bib`: BibTeX file containing academic references.
-- `Quantum-RL-Framework-v1.0.pdf`: Compiled PDF of the paper (v1.0).
+- `Quantum-RL-Framework-v1.1.pdf`: Compiled PDF of the paper (v1.1).
 - `LICENSE`: License file detailing the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) terms.
 
 ---
@@ -33,8 +33,9 @@ This repository hosts the LaTeX source files and compiled PDF for the paper *"Qu
 ---
 
 ## DOI and Archival
-This work is archived on [Zenodo](https://zenodo.org) with a permanent DOI:  
-[**10.5281/zenodo.15382550**](https://doi.org/10.5281/zenodo.15382550)
+This work is archived on [Zenodo](https://zenodo.org) with permanent DOIs:  
+- v1.1: [**10.5281/zenodo.15382550**](https://doi.org/10.5281/zenodo.15382550)  
+- v1.0: [**10.5281/zenodo.15382610**](https://doi.org/10.5281/zenodo.15382610)
 
 ---
 
@@ -52,13 +53,13 @@ Email: [bergerteodor@googlemail.com](mailto:bergerteodor@googlemail.com)
 ---
 
 ## Future Roadmap
-- **v1.1**: Potential exploration of noise levels up to p=0.7 and multi-qubit scaling.
+- **v1.2**: Potential exploration of noise levels up to p=0.7 and multi-qubit scaling.
 - **v2.0**: Integration with cloud frameworks (e.g., AWS Braket) for real-time applications.
 - **Long-Term Goals**: Achieving quantum advantage in high-frequency trading and advanced healthcare.
 
 ---
 
 ## Acknowledgments
-We express our gratitude to the IBM Quantum teams for their invaluable support.
+We express our gratitude to the xAI and IBM Quantum teams for their invaluable support.
 
 *Teodor Berger, May 2025*
