@@ -1,1 +1,13 @@
+@article{dong2022quantum,
+  title={Quantum reinforcement learning: A comprehensive survey},
+  author={Dong, Daoyi and Chen, Chunlin and Li, Hanxiong},
+  journal={IEEE Transactions on Neural Networks and Learning Systems},
+  year={2022}
+}
 
+@inproceedings{jerbi2021variational,
+  title={Variational quantum reinforcement learning via policy gradients},
+  author={Jerbi, Sofiene and Fiderer, Lukas J and Poulsen Nautrup, Hans J},
+  booktitle={NeurIPS},
+  year={2021}
+}
